@@ -55,7 +55,11 @@ func removeNonNumberCharacters(str string) string {
 
 func main() {
 
+<<<<<<< HEAD
 	lines := readFileIntoSlice("input.txt")
+=======
+	lines := readFileIntoSplice("input.txt")
+>>>>>>> 8b4207b8038fd083a7cb166163617f8424daacc5
 
 	var allNumbers []int
 
