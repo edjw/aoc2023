@@ -9,6 +9,23 @@ import (
 	"strings"
 )
 
+func readFileIntoSlice(filename string) []string {
+	data, err := os.ReadFile(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return strings.Split(string(data), "\n")
+}
+
+func sumASlice(slice []int) int {
+	total := 0
+	for _, number := range slice {
+		total += number
+	}
+
+	return total
+}
+
 func putNumberInsideANumberWord(line string) string {
 
 	numberMap := map[string]string{
@@ -25,7 +42,7 @@ func putNumberInsideANumberWord(line string) string {
 
 	processedString := line
 	for key, value := range numberMap {
-		processedString = strings.Replace(processedString, key, value, -1) // -1 says to replace all occurrences
+		processedString = strings.ReplaceAll(processedString, key, value)
 	}
 
 	return processedString
@@ -37,11 +54,8 @@ func removeNonNumberCharacters(str string) string {
 }
 
 func main() {
-	data, err := os.ReadFile("input.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	lines := strings.Split(string(data), "\n")
+
+	lines := readFileIntoSlice("input.txt")
 
 	var allNumbers []int
 
@@ -64,11 +78,7 @@ func main() {
 		allNumbers = append(allNumbers, wholeNumberInteger)
 	}
 
-	var total int
-	for _, number := range allNumbers {
-
-		total += number
-	}
+	total := sumASlice(allNumbers)
 
 	fmt.Println(total)
 
